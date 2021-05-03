@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService";
+
+package num;
+
+service Num {
+  rpc GetNums (UserNameRequest) returns (stream HelloNumReply);
+}
+
+message UserNameRequest {
+  string FirstName = 1;
+  string LastName = 2;
+}
+
+message HelloNumReply {
+  string Message = 1;
+}
