@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
 namespace GrpcService
@@ -13,15 +12,9 @@ namespace GrpcService
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(webBuilder =>
-            {
-                webBuilder.ConfigureKestrel(options =>
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    // Setup a HTTP/2 endpoint without TLS.
-                    options.ListenLocalhost(5002, o => o.Protocols =
-                        HttpProtocols.Http2);
+                    webBuilder.UseStartup<Startup>();
                 });
-                webBuilder.UseStartup<Startup>();
-            });
     }
 }
